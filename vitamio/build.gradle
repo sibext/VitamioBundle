@@ -1,4 +1,26 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://mvn.sibext.com/"
+        }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
+    dependencies {
+//        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.github.dcendents:android-maven-plugin:1.2'
+    }
+}
+
+
 apply plugin: 'com.android.library'
+apply plugin: 'android-maven'
+
+project.archivesBaseName = 'vitamio'
+group = 'com.sibext'
+version = '0.1'
 
 dependencies {
 }
@@ -21,6 +43,22 @@ android {
             res.srcDirs = ['res']
         }
 
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+
+    signingConfigs {
+        packagingOptions {
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/LICENSE.txt'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
 }
